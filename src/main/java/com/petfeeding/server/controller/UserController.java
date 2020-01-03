@@ -6,16 +6,19 @@ import com.petfeeding.server.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping(value = "/server/api/v1/user", produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
-        consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RestController
+@RequestMapping(value = "/server/api/v1/user", produces = MediaType.APPLICATION_JSON_VALUE,
+        consumes = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @RequestMapping(method = RequestMethod.POST, path = "/register")
     public RegisterResponse register(Request request) {
-        RegisterResponse registerResponse = new RegisterResponse();
-        System.out.println(registerResponse);
-        return registerResponse;
+        return userService.register(request);
     }
 }

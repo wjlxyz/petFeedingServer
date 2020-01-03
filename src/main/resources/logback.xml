@@ -1,87 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 从高到地低 OFF 、 FATAL 、 ERROR 、 WARN 、 INFO 、 DEBUG 、 TRACE 、 ALL -->
-<!-- 日志输出规则  根据当前ROOT 级别，日志输出时，级别高于root默认的级别时  会输出 -->
-<!-- 以下  每个配置的 filter 是过滤掉输出文件里面，会出现高级别文件，依然出现低级别的日志信息，通过filter 过滤只记录本级别的日志-->
-<configuration>
-    <!-- 文件输出格式 -->
-    <property name="PATTERN"
-              value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg%n" />
-    <!-- 文件路径 -->
-    <property name="FILE_PATH" value="./data/logs" />
+<configuration scan="true" scanPeriod="1 minutes" debug="false">
+    <!--设置模块名，用于日志文件名和文件目录-->
+    <property name="module.name" value="petfFeeding"/>
+    <!--设置日志的目录-->
+    <property name="log.dir" value="./data/logs"/>
+    <!-- 输出格式 -->
+    <property name="out.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %class{32}:%-4line %-5level - %m%n"/>
+    <!-- 活动文件的大小 -->
+    <property name="max.file.size" value="200MB"/>
+    <!-- 保留的归档文件的最大数量 -->
+    <property name="max.history" value="30"/>
+    <!-- 控制所有归档日志文件的总大小 -->
+    <property name="total.size.cap" value="15GB"/>
 
-    <!-- 开发环境 -->
-    <springProfile name="dev">
-        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-            <encoder>
-                <pattern>${PATTERN}</pattern>
-            </encoder>
-        </appender>
+    <!-- 属性文件 -->
+    <!-- 默认的控制台日志输出，一般生产环境都是后台启动，这个没太大作用 -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${out.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
 
-        <logger name="com.km.controller" level="debug" />
+    <!-- 普通日志 -->
+    <appender name="logfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.dir}/${module.name}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <FileNamePattern>${log.dir}/${module.name}.%d{yyyy-MM-dd-HH}.%i.log</FileNamePattern>
+            <maxFileSize>${max.file.size}</maxFileSize>
+            <maxHistory>${max.history}</maxHistory>
+            <totalSizeCap>${total.size.cap}</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${out.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
 
-        <root level="info">
-            <appender-ref ref="CONSOLE" />
-        </root>
-    </springProfile>
+    <!-- ERROR日志 -->
+    <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log.dir}/${module.name}-error.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${log.dir}/${module.name}-error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>${max.file.size}</maxFileSize>
+            <maxHistory>${max.history}</maxHistory>
+            <totalSizeCap>${total.size.cap}</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>${out.pattern}</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
 
-    <!-- 测试环境 -->
-    <springProfile name="test">
-        <appender name="ROLLING"
-                  class="ch.qos.logback.core.rolling.RollingFileAppender">
-            <!-- 文件路径 -->
-            <file>D:/DevData/kmAppletLogs/kmapplet.log</file>
-            <rollingPolicy
-                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-                <!-- rollover daily -->
-                <fileNamePattern>D:/DevData/kmAppletLogs/kmapplet_%d{yyyy-MM-dd}.%i.log
-                </fileNamePattern>
-                <!-- each file should be at most 100MB, keep 60 days worth of history,
-                    but at most 20GB -->
-                <maxFileSize>1MB</maxFileSize>
-                <maxHistory>60</maxHistory>
-                <totalSizeCap>10MB</totalSizeCap>
-            </rollingPolicy>
-            <!-- <layout class="ch.qos.logback.classic.PatternLayout"> <pattern>${PATTERN}</pattern>
-                </layout> -->
-            <encoder>
-                <pattern>${PATTERN}</pattern>
-            </encoder>
-        </appender>
 
-        <root level="DEBUG">
-            <appender-ref ref="ROLLING" />
-        </root>
-    </springProfile>
+    <!-- root 默认日志配置 ，只能为ERROR或者WARN！-->
+    <root level="error">
+        <appender-ref ref="ERROR_FILE"/>
+    </root>
 
-    <!-- 生产环境 -->
-    <springProfile name="prod">
-        <appender name="ROLLING"
-                  class="ch.qos.logback.core.rolling.RollingFileAppender">
-            <!-- 文件路径 -->
-            <file>/ftp/private/kmAppletLogs/kmapplet.log</file>
-            <rollingPolicy
-                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-                <!-- rollover daily -->
-                <fileNamePattern>/ftp/private/kmAppletLogs/kmapplet_%d{yyyy-MM-dd}.%i.log
-                </fileNamePattern>
-                <!-- each file should be at most 10MB, keep 30 days worth of history,
-                    but at most 1GB -->
-                <!-- 每个日志文件最大10MB, 保留30天的日志文件, 但是最多总文件大小为 5GB -->
-                <maxFileSize>10MB</maxFileSize>
-                <maxHistory>30</maxHistory>
-                <totalSizeCap>5GB</totalSizeCap>
-            </rollingPolicy>
-            <!-- <layout class="ch.qos.logback.classic.PatternLayout"> <pattern>${PATTERN}</pattern>
-                </layout> -->
-            <encoder>
-                <pattern>${PATTERN}</pattern>
-            </encoder>
-        </appender>
-
-        <!--这里控制日志输出级别 -->
-        <root level="DEBUG">
-            <appender-ref ref="ROLLING" />
-        </root>
-    </springProfile>
-
+    <!--业务模块的包的日志配置-->
+    <logger name="com.etekcity.cloud" level="DEBUG">
+        <appender-ref ref="logfile"/>
+        <appender-ref ref="console"/>
+    </logger>
 </configuration>
