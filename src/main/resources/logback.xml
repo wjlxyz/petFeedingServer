@@ -7,7 +7,7 @@
     <property name="PATTERN"
               value="%-12(%d{yyyy-MM-dd HH:mm:ss.SSS}) |-%-5level [%thread] %c [%L] -| %msg%n" />
     <!-- 文件路径 -->
-    <!--<property name="FILE_PATH" value="D:/DevData/kmcmsLogs" /> -->
+    <property name="FILE_PATH" value="./data/logs" />
 
     <!-- 开发环境 -->
     <springProfile name="dev">
