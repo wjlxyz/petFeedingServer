@@ -1,4 +1,4 @@
-package com.petfeeding.server.dto.response.result;
+package com.petfeeding.server.dto.response.result.user;
 
 /**
  * @author jinlong

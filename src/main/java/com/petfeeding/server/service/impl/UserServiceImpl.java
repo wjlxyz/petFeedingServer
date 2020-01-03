@@ -1,13 +1,12 @@
 package com.petfeeding.server.service.impl;
 
-import com.petfeeding.server.dto.request.ApiRequest;
-import com.petfeeding.server.dto.request.concrete.LoginRequest;
-import com.petfeeding.server.dto.request.concrete.RegisterRequest;
+import com.petfeeding.server.dto.request.concrete.user.LoginRequest;
+import com.petfeeding.server.dto.request.concrete.user.RegisterRequest;
 import com.petfeeding.server.dto.request.concrete.UpdateUserInfoRequest;
 import com.petfeeding.server.dto.response.ApiResponse;
-import com.petfeeding.server.dto.response.result.LoginResult;
-import com.petfeeding.server.dto.response.result.RegisterResult;
-import com.petfeeding.server.dto.response.result.UpdateUserInfoResult;
+import com.petfeeding.server.dto.response.result.user.LoginResult;
+import com.petfeeding.server.dto.response.result.user.RegisterResult;
+import com.petfeeding.server.dto.response.result.user.UpdateUserInfoResult;
 import com.petfeeding.server.service.UserService;
 import org.springframework.stereotype.Service;
 
