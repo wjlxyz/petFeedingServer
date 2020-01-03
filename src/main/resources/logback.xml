@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true" scanPeriod="1 minutes" debug="false">
     <!--设置模块名，用于日志文件名和文件目录-->
-    <property name="module.name" value="petfFeeding"/>
+    <property name="module.name" value="petFeeding"/>
     <!--设置日志的目录-->
     <property name="log.dir" value="./data/logs"/>
     <!-- 输出格式 -->
@@ -57,12 +57,12 @@
 
 
     <!-- root 默认日志配置 ，只能为ERROR或者WARN！-->
-    <root level="error">
+    <root level="INFO">
         <appender-ref ref="ERROR_FILE"/>
     </root>
 
     <!--业务模块的包的日志配置-->
-    <logger name="com.etekcity.cloud" level="DEBUG">
+    <logger name="com.petfeeding.server" level="DEBUG">
         <appender-ref ref="logfile"/>
         <appender-ref ref="console"/>
     </logger>

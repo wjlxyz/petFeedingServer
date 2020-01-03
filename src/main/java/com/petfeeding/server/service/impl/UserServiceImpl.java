@@ -15,18 +15,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ApiResponse<RegisterResult> register(RegisterRequest request) {
-        System.out.println(request);
-        ApiResponse<RegisterResult> registerApiResponse = ApiResponse.successRespFromReq(request);
-        System.out.println(registerApiResponse);
-        return registerApiResponse;
+        return ApiResponse.successRespFromReq(request);
     }
 
     @Override
     public ApiResponse<LoginResult> login(LoginRequest request) {
-        System.out.println(request);
-        ApiResponse<LoginResult> apiResponse = ApiResponse.successRespFromReq(request);
-        System.out.println(apiResponse);
-        return apiResponse;
+        return ApiResponse.successRespFromReq(request);
     }
 
     @Override

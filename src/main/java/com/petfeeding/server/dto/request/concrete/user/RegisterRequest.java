@@ -9,4 +9,6 @@ import lombok.Data;
  */
 @Data
 public class RegisterRequest extends ApiRequest {
+    private Long phoneNumber;
+    private String password;
 }
