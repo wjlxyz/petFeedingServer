@@ -1,13 +1,17 @@
-/* SQLEditor (Generic SQL)*/
+/* SQLEditor (MySQL (2))*/
 
 
-CREATE TABLE 'user'
+CREATE TABLE user
 (
-  id INTEGER DEFAULT '10000' NOT NULL AUTO_INCREMENT ,
+  id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   user_name VARCHAR(16) NOT NULL UNIQUE ,
-  phone_number INTEGER(11) NOT NULL UNIQUE ,
-  user_role TINYINT(1) DEFAULT '0' NOT NULL,
-  user_address CHAR,
-  CONSTRAINT id PRIMARY KEY (id)
+  password VARCHAR(32) NOT NULL,
+  gender TINYINT(0) NOT NULL,
+  phone_number INTEGER(11) UNSIGNED NOT NULL UNIQUE ,
+  user_role TINYINT(1) NOT NULL DEFAULT 0,
+  user_address VARCHAR(256),
+  create_at DATETIME NOT NULL,
+  update_at DATETIME NOT NULL,
+  PRIMARY KEY (id)
 );
 
