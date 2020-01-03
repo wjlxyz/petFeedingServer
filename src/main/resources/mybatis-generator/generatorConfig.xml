@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <properties resource="application.properties"/>
+
+    <context id="Mysql" targetRuntime="MyBatis3" defaultModelType="flat">
+
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+
+        <jdbcConnection driverClass="${spring.datasource.driver-class-name}"
+                       connectionURL="${spring.datasource.url}"
+                       userId="${spring.datasource.username}"
+                       password="${spring.datasource.password}">
+        </jdbcConnection>
+
+        <javaModelGenerator targetPackage="com.petfeeding.server.dal.model" targetProject="src/main/java"/>
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.petfeeding.server.dal.mapper"
+                            targetProject="src/main/java"/>
+
+        <table tableName="user" domainObjectName="User"/>
+        <table tableName="order" domainObjectName="Order"/>
+    </context>
+</generatorConfiguration>
