@@ -21,4 +21,8 @@ public enum  ErrorCode {
     public String getMsg() {
         return msg;
     }
+
+    public boolean isSuccess() {
+        return this.equals(SUCCESS);
+    }
 }

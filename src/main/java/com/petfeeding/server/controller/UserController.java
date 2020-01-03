@@ -1,8 +1,11 @@
 package com.petfeeding.server.controller;
 
-import com.petfeeding.server.dto.request.Request;
-import com.petfeeding.server.dto.response.object.RegisterResponse;
-import com.petfeeding.server.service.UserService;
+import com.petfeeding.server.dto.response.result.LoginResult;
+import com.petfeeding.server.dto.response.result.RegisterResult;
+import com.petfeeding.server.dto.request.concrete.LoginRequest;
+import com.petfeeding.server.dto.request.concrete.RegisterRequest;
+import com.petfeeding.server.dto.response.ApiResponse;
+import com.petfeeding.server.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,10 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
 
     @RequestMapping(method = RequestMethod.POST, path = "/register")
-    public RegisterResponse register(Request request) {
+    public ApiResponse<RegisterResult> register(RegisterRequest request) {
         return userService.register(request);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/login")
+    public ApiResponse<LoginResult> register(LoginRequest request) {
+        return userService.login(request);
     }
 }

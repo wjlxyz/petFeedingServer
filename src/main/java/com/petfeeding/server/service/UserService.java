@@ -1,16 +1,23 @@
 package com.petfeeding.server.service;
 
-import com.petfeeding.server.dto.request.Request;
-import com.petfeeding.server.dto.response.object.RegisterResponse;
-import org.springframework.stereotype.Service;
+import com.petfeeding.server.dto.request.ApiRequest;
+import com.petfeeding.server.dto.request.concrete.LoginRequest;
+import com.petfeeding.server.dto.request.concrete.RegisterRequest;
+import com.petfeeding.server.dto.request.concrete.UpdateUserInfoRequest;
+import com.petfeeding.server.dto.response.ApiResponse;
+import com.petfeeding.server.dto.response.result.LoginResult;
+import com.petfeeding.server.dto.response.result.RegisterResult;
+import com.petfeeding.server.dto.response.result.UpdateUserInfoResult;
 
-@Service
-public class UserService {
+/**
+ * @author jinlong
+ * @since 2020-01-03 10:52
+ */
+public interface UserService {
 
-    public RegisterResponse register(Request request) {
-        System.out.println(request);
-        RegisterResponse registerResponse = new RegisterResponse();
-        System.out.println(registerResponse);
-        return registerResponse;
-    }
+    ApiResponse<RegisterResult> register(RegisterRequest request);
+
+    ApiResponse<LoginResult> login(LoginRequest request);
+
+    ApiResponse<UpdateUserInfoResult> updateUserInfo(UpdateUserInfoRequest request);
 }

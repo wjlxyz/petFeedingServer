@@ -3,9 +3,10 @@ package com.petfeeding.server.dto.request;
 import lombok.Data;
 
 @Data
-public class Request {
+public abstract class ApiRequest {
 
     private Long requestId;
+    private String method;
     private Integer accountId;
     private String token;
 }
