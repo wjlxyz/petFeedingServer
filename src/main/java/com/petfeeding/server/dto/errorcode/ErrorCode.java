@@ -1,9 +1,19 @@
 package com.petfeeding.server.dto.errorcode;
 
+/**
+ * errorCode pattern: -{a:versionNo}{bb:typeNo}{cc:code}
+ */
 public enum  ErrorCode {
 
     SUCCESS(0, "Success"),
-    INTERNAL_ERROR(-100001, "模块内部错误");
+
+    INTERNAL_ERROR(-10101, "模块内部错误"),
+
+    COMMON_ILLEGAL_ARGS_ERROR(-10201, "参数错误"),
+
+    COMMON_TOKEN_EXPIRED_ERROR(-10202, "token过期")
+
+    ;
 
 
     private int code;

@@ -1,4 +1,4 @@
-package com.petfeeding.server.log;
+package com.petfeeding.server.aspect.log;
 
 import java.lang.annotation.*;
 

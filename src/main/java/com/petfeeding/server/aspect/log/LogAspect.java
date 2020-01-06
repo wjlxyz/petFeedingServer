@@ -1,4 +1,4 @@
-package com.petfeeding.server.log;
+package com.petfeeding.server.aspect.log;
 
 import com.google.gson.Gson;
 import com.petfeeding.server.dto.request.ApiRequest;
@@ -8,6 +8,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,11 +18,12 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Aspect
 @Component
+@Order(Integer.MIN_VALUE + 1)
 public class LogAspect {
 
     private static Gson gson = new Gson();
 
-    @Pointcut("@within(com.petfeeding.server.log.LogAop)")
+    @Pointcut("@within(com.petfeeding.server.aspect.log.LogAop)")
     public void handleRequestLogPointCut() {
     }
 

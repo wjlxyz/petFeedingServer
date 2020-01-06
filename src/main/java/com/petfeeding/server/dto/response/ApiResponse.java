@@ -40,11 +40,11 @@ public class ApiResponse<T> {
         return fromReq(request, ErrorCode.SUCCESS, result);
     }
 
-    private static <T> ApiResponse<T> fromReq(ApiRequest request, ErrorCode errorCode) {
+    public static <T> ApiResponse<T> fromReq(ApiRequest request, ErrorCode errorCode) {
         return fromReq(request, errorCode, null);
     }
 
-    private static <T> ApiResponse<T> fromReq(@NotNull ApiRequest request, @NotNull ErrorCode errorCode, @Nullable T result) {
+    public static <T> ApiResponse<T> fromReq(@NotNull ApiRequest request, @NotNull ErrorCode errorCode, @Nullable T result) {
         return new ApiResponse<>(request.getRequestId(), errorCode, result);
     }
 
@@ -86,4 +86,7 @@ public class ApiResponse<T> {
         this.msg = errorCode.getMsg();
     }
 
+    public ErrorCode getErrorCode() {
+        return errorCode;
+    }
 }

@@ -1,11 +1,12 @@
 package com.petfeeding.server.controller;
 
+import com.petfeeding.server.aspect.token.TokenValidatorAop;
 import com.petfeeding.server.dto.response.result.user.LoginResult;
 import com.petfeeding.server.dto.response.result.user.RegisterResult;
 import com.petfeeding.server.dto.request.concrete.user.LoginRequest;
 import com.petfeeding.server.dto.request.concrete.user.RegisterRequest;
 import com.petfeeding.server.dto.response.ApiResponse;
-import com.petfeeding.server.log.LogAop;
+import com.petfeeding.server.aspect.log.LogAop;
 import com.petfeeding.server.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -29,6 +30,7 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/login")
+    @TokenValidatorAop
     public ApiResponse<LoginResult> login(@RequestBody LoginRequest request) {
         return userService.login(request);
     }
