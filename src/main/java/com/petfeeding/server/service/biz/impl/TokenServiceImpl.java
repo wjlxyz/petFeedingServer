@@ -1,10 +1,10 @@
-package com.petfeeding.server.service.impl;
+package com.petfeeding.server.service.biz.impl;
 
 import com.petfeeding.server.dto.errorcode.ErrorCode;
 import com.petfeeding.server.dto.request.ApiRequest;
 import com.petfeeding.server.dto.response.ApiResponse;
 import com.petfeeding.server.dto.response.result.token.TokenResult;
-import com.petfeeding.server.service.TokenService;
+import com.petfeeding.server.service.biz.TokenService;
 import org.springframework.stereotype.Service;
 
 /**

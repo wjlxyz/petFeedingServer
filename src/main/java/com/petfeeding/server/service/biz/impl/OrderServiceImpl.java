@@ -1,4 +1,4 @@
-package com.petfeeding.server.service.impl;
+package com.petfeeding.server.service.biz.impl;
 
 import org.springframework.stereotype.Service;
 

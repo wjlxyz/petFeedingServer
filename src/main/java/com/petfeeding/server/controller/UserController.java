@@ -7,7 +7,7 @@ import com.petfeeding.server.dto.request.concrete.user.LoginRequest;
 import com.petfeeding.server.dto.request.concrete.user.RegisterRequest;
 import com.petfeeding.server.dto.response.ApiResponse;
 import com.petfeeding.server.aspect.log.LogAop;
-import com.petfeeding.server.service.impl.UserServiceImpl;
+import com.petfeeding.server.service.biz.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestBody;

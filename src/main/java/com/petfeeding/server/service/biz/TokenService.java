@@ -1,4 +1,4 @@
-package com.petfeeding.server.service;
+package com.petfeeding.server.service.biz;
 
 import com.petfeeding.server.dto.request.ApiRequest;
 import com.petfeeding.server.dto.response.ApiResponse;

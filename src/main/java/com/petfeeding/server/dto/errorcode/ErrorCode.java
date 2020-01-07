@@ -7,7 +7,7 @@ public enum  ErrorCode {
 
     SUCCESS(0, "Success"),
 
-    INTERNAL_ERROR(-10101, "模块内部错误"),
+    INTERNAL_ERROR(-10101, "服务器内部错误"),
 
     COMMON_ILLEGAL_ARGS_ERROR(-10201, "参数错误"),
 

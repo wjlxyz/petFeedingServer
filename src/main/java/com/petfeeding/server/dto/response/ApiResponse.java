@@ -32,6 +32,14 @@ public class ApiResponse<T> {
         this.msg = errorCode.getMsg();
     }
 
+    public static <T> ApiResponse<T> globalInternalErrorResp(ErrorCode errorCode) {
+        return new ApiResponse<>(System.currentTimeMillis(), errorCode);
+    }
+
+    public static <T> ApiResponse<T> globalInternalErrorResp() {
+        return globalInternalErrorResp(ErrorCode.INTERNAL_ERROR);
+    }
+
     public static <T> ApiResponse<T> successRespFromReq(ApiRequest request) {
         return fromReq(request, ErrorCode.SUCCESS);
     }

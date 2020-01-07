@@ -5,7 +5,7 @@ import com.petfeeding.server.dto.errorcode.ErrorCode;
 import com.petfeeding.server.dto.request.ApiRequest;
 import com.petfeeding.server.dto.response.ApiResponse;
 import com.petfeeding.server.dto.response.result.token.TokenResult;
-import com.petfeeding.server.service.TokenService;
+import com.petfeeding.server.service.biz.TokenService;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
@@ -35,7 +35,7 @@ public class TokenValidatorAspect {
         ApiRequest request = (ApiRequest) point.getArgs()[0];
         ApiResponse<TokenResult> response = tokenService.validateToken(request);
         if (!response.getErrorCode().isSuccess()) {
-            throw new RuntimeException(ErrorCode.COMMON_TOKEN_EXPIRED_ERROR.getMsg());
+            throw new Exception(ErrorCode.COMMON_TOKEN_EXPIRED_ERROR.getMsg());
         }
     }
 }

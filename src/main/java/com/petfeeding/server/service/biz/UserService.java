@@ -1,4 +1,4 @@
-package com.petfeeding.server.service;
+package com.petfeeding.server.service.biz;
 
 import com.petfeeding.server.dto.request.concrete.user.LoginRequest;
 import com.petfeeding.server.dto.request.concrete.user.RegisterRequest;

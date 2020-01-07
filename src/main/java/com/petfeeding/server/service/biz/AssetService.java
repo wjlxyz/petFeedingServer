@@ -1,4 +1,4 @@
-package com.petfeeding.server.service;
+package com.petfeeding.server.service.biz;
 
 /**
  * @author jinlong
