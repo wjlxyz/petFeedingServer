@@ -1,9 +1,11 @@
 package com.petfeeding.server.service.biz.impl;
 
+import com.petfeeding.server.dal.mapper.UserMapper;
+import com.petfeeding.server.dal.model.User;
+import com.petfeeding.server.dto.request.concrete.UpdateUserInfoRequest;
 import com.petfeeding.server.dto.request.concrete.user.GetUserInfoRequest;
 import com.petfeeding.server.dto.request.concrete.user.LoginRequest;
 import com.petfeeding.server.dto.request.concrete.user.RegisterRequest;
-import com.petfeeding.server.dto.request.concrete.UpdateUserInfoRequest;
 import com.petfeeding.server.dto.response.ApiResponse;
 import com.petfeeding.server.dto.response.result.user.GetUserInfoResult;
 import com.petfeeding.server.dto.response.result.user.LoginResult;
@@ -24,6 +26,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private RedisTemplate<String, String> redisTemplate;
 
+    @Autowired
+    private UserMapper userMapper;
+
     @Override
     public ApiResponse<RegisterResult> register(RegisterRequest request) {
         return ApiResponse.successRespFromReq(request);
@@ -43,6 +48,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ApiResponse<GetUserInfoResult> getUserInfo(GetUserInfoRequest request) {
+        User user = userMapper.selectByPrimaryKey(request.getAccountId().toString());
         GetUserInfoResult result = new GetUserInfoResult();
         result.setAccountId(request.getAccountId());
         return ApiResponse.successRespFromReqWithResult(request, result);
