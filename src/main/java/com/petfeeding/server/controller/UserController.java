@@ -1,6 +1,8 @@
 package com.petfeeding.server.controller;
 
 import com.petfeeding.server.aspect.token.TokenValidatorAop;
+import com.petfeeding.server.dto.request.concrete.user.GetUserInfoRequest;
+import com.petfeeding.server.dto.response.result.user.GetUserInfoResult;
 import com.petfeeding.server.dto.response.result.user.LoginResult;
 import com.petfeeding.server.dto.response.result.user.RegisterResult;
 import com.petfeeding.server.dto.request.concrete.user.LoginRequest;
@@ -30,8 +32,13 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST, path = "/login")
-    @TokenValidatorAop
     public ApiResponse<LoginResult> login(@RequestBody LoginRequest request) {
         return userService.login(request);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/getUserInfo")
+    @TokenValidatorAop
+    public ApiResponse<GetUserInfoResult> getUserInfo(@RequestBody GetUserInfoRequest request) {
+        return userService.getUserInfo(request);
     }
 }

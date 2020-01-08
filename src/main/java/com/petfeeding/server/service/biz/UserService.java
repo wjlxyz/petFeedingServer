@@ -1,9 +1,11 @@
 package com.petfeeding.server.service.biz;
 
+import com.petfeeding.server.dto.request.concrete.user.GetUserInfoRequest;
 import com.petfeeding.server.dto.request.concrete.user.LoginRequest;
 import com.petfeeding.server.dto.request.concrete.user.RegisterRequest;
 import com.petfeeding.server.dto.request.concrete.UpdateUserInfoRequest;
 import com.petfeeding.server.dto.response.ApiResponse;
+import com.petfeeding.server.dto.response.result.user.GetUserInfoResult;
 import com.petfeeding.server.dto.response.result.user.LoginResult;
 import com.petfeeding.server.dto.response.result.user.RegisterResult;
 import com.petfeeding.server.dto.response.result.user.UpdateUserInfoResult;
@@ -19,4 +21,6 @@ public interface UserService {
     ApiResponse<LoginResult> login(LoginRequest request);
 
     ApiResponse<UpdateUserInfoResult> updateUserInfo(UpdateUserInfoRequest request);
+
+    ApiResponse<GetUserInfoResult> getUserInfo(GetUserInfoRequest request);
 }

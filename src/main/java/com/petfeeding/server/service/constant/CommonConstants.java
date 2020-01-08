@@ -8,4 +8,6 @@ public class CommonConstants {
 
     public static String TOKEN_PREFIX = "tk:";
 
+    public static long TOKEN_EXPIRE_SECONDS = 60 * 60 * 24 * 30;
+
 }
