@@ -2,10 +2,14 @@ package com.petfeeding.server.service.biz.impl;
 
 import com.petfeeding.server.dto.errorcode.ErrorCode;
 import com.petfeeding.server.dto.request.ApiRequest;
-import com.petfeeding.server.dto.response.ApiResponse;
-import com.petfeeding.server.dto.response.result.token.TokenResult;
 import com.petfeeding.server.service.biz.TokenService;
+import com.petfeeding.server.service.constant.CommonConstants;
+import com.petfeeding.server.service.exception.ApiException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 /**
  * @author jinlong
@@ -14,6 +18,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class TokenServiceImpl implements TokenService {
 
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
+
     /**
      * token pattern in redis:
      * key: tk:{accountId}
@@ -21,14 +28,14 @@ public class TokenServiceImpl implements TokenService {
      * expire time: 30days
      *
      * @param request request with token and accountId
-     * @return if the token of request is valid
      */
     @Override
-    public ApiResponse<TokenResult> validateToken(ApiRequest request) {
+    public void validateToken(ApiRequest request) {
         if (request.getAccountId() == null || request.getToken() == null) {
-            return ApiResponse.fromReq(request, ErrorCode.COMMON_ILLEGAL_ARGS_ERROR);
+            throw new ApiException(ErrorCode.COMMON_ILLEGAL_ARGS_ERROR);
         }
-
-        return ApiResponse.fromReq(request, ErrorCode.COMMON_TOKEN_EXPIRED_ERROR);
+        if (!Objects.equals(redisTemplate.opsForValue().get(CommonConstants.TOKEN_PREFIX + request.getAccountId().toString()), request.getToken())) {
+            throw new ApiException(ErrorCode.COMMON_TOKEN_EXPIRED_ERROR);
+        }
     }
 }

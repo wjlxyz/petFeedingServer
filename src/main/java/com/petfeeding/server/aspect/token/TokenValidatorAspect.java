@@ -33,9 +33,6 @@ public class TokenValidatorAspect {
     public void validateToken(JoinPoint point) throws Throwable {
         log.info("validate token");
         ApiRequest request = (ApiRequest) point.getArgs()[0];
-        ApiResponse<TokenResult> response = tokenService.validateToken(request);
-        if (!response.getErrorCode().isSuccess()) {
-            throw new Exception(ErrorCode.COMMON_TOKEN_EXPIRED_ERROR.getMsg());
-        }
+        tokenService.validateToken(request);
     }
 }

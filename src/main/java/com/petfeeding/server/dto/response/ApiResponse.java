@@ -1,5 +1,6 @@
 package com.petfeeding.server.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.petfeeding.server.dto.errorcode.ErrorCode;
 import com.petfeeding.server.dto.request.ApiRequest;
 import lombok.Data;
@@ -18,6 +19,7 @@ public class ApiResponse<T> {
     private T result;
 
     @NotNull(message = "errorCode should not be null")
+    @JsonIgnore
     private transient ErrorCode errorCode;
 
     private ApiResponse(Long requestId, ErrorCode errorCode) {

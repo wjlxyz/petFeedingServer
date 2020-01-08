@@ -1,9 +1,8 @@
-package com.petfeeding.server.service.exception;
+package com.petfeeding.server.service.exception.handler;
 
-import com.petfeeding.server.dto.errorcode.ErrorCode;
 import com.petfeeding.server.dto.response.ApiResponse;
 import com.petfeeding.server.dto.response.result.VoidResult;
-import lombok.extern.slf4j.Slf4j;
+import com.petfeeding.server.service.exception.ApiException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -18,8 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 @ResponseBody
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(value = Exception.class)
-    public ApiResponse<VoidResult> defaultExceptionHandler(HttpServletRequest request, Exception e) {
-        return ApiResponse.globalInternalErrorResp();
+    @ExceptionHandler(value = ApiException.class)
+    public ApiResponse<VoidResult> defaultExceptionHandler(HttpServletRequest request, ApiException e) {
+        return ApiResponse.globalInternalErrorResp(e.getErrorCode());
     }
 }

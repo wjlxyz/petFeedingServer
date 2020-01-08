@@ -1,8 +1,6 @@
 package com.petfeeding.server.service.biz;
 
 import com.petfeeding.server.dto.request.ApiRequest;
-import com.petfeeding.server.dto.response.ApiResponse;
-import com.petfeeding.server.dto.response.result.token.TokenResult;
 
 /**
  * @author jinlong
@@ -10,5 +8,5 @@ import com.petfeeding.server.dto.response.result.token.TokenResult;
  */
 public interface TokenService {
 
-    ApiResponse<TokenResult> validateToken(ApiRequest request);
+    void validateToken(ApiRequest request);
 }
