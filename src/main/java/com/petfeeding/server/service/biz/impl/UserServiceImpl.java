@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ApiResponse<GetUserInfoResult> getUserInfo(GetUserInfoRequest request) {
-        User user = userMapper.selectByPrimaryKey(request.getAccountId().toString());
+        User user = userMapper.selectByPrimaryKey(request.getAccountId());
         GetUserInfoResult result = new GetUserInfoResult();
         result.setAccountId(request.getAccountId());
         return ApiResponse.successRespFromReqWithResult(request, result);

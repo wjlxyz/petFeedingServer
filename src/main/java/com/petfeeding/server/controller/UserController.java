@@ -2,6 +2,7 @@ package com.petfeeding.server.controller;
 
 import com.petfeeding.server.aspect.token.TokenValidatorAop;
 import com.petfeeding.server.dto.request.concrete.user.GetUserInfoRequest;
+import com.petfeeding.server.dto.request.concrete.user.UpdateUserInfoRequest;
 import com.petfeeding.server.dto.response.result.user.GetUserInfoResult;
 import com.petfeeding.server.dto.response.result.user.LoginResult;
 import com.petfeeding.server.dto.response.result.user.RegisterResult;
@@ -9,6 +10,7 @@ import com.petfeeding.server.dto.request.concrete.user.LoginRequest;
 import com.petfeeding.server.dto.request.concrete.user.RegisterRequest;
 import com.petfeeding.server.dto.response.ApiResponse;
 import com.petfeeding.server.aspect.log.LogAop;
+import com.petfeeding.server.dto.response.result.user.UpdateUserInfoResult;
 import com.petfeeding.server.service.biz.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -40,5 +42,11 @@ public class UserController {
     @TokenValidatorAop
     public ApiResponse<GetUserInfoResult> getUserInfo(@RequestBody GetUserInfoRequest request) {
         return userService.getUserInfo(request);
+    }
+
+    @RequestMapping(method = RequestMethod.POST, path = "/updateUserInfo")
+    @TokenValidatorAop
+    public ApiResponse<UpdateUserInfoResult> updateUserInfo(@RequestBody UpdateUserInfoRequest request) {
+        return userService.updateUserInfo(request);
     }
 }
