@@ -11,6 +11,4 @@ import javax.validation.constraints.NotNull;
  */
 @Data
 public class LoginRequest extends ApiRequest {
-    @NotNull
-    private Integer accountId;
 }

@@ -12,9 +12,4 @@ import javax.validation.constraints.NotNull;
 @Data
 public class GetUserInfoRequest extends ApiRequest {
 
-    @NotNull
-    private Integer accountId;
-
-    private String token;
-
 }
