@@ -12,9 +12,4 @@ public abstract class ApiRequest {
 
     @NotNull
     private String method;
-
-    @NotNull
-    private Integer accountId;
-
-    private String token;
 }

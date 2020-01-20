@@ -1,4 +1,4 @@
-package com.petfeeding.server.dto.request.concrete;
+package com.petfeeding.server.dto.request.concrete.user;
 
 import lombok.Data;
 

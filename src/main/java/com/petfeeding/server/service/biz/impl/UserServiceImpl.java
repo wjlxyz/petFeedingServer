@@ -2,7 +2,7 @@ package com.petfeeding.server.service.biz.impl;
 
 import com.petfeeding.server.dal.mapper.UserMapper;
 import com.petfeeding.server.dal.model.User;
-import com.petfeeding.server.dto.request.concrete.UpdateUserInfoRequest;
+import com.petfeeding.server.dto.request.concrete.user.UpdateUserInfoRequest;
 import com.petfeeding.server.dto.request.concrete.user.GetUserInfoRequest;
 import com.petfeeding.server.dto.request.concrete.user.LoginRequest;
 import com.petfeeding.server.dto.request.concrete.user.RegisterRequest;
