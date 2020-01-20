@@ -19,7 +19,7 @@ import org.springframework.stereotype.Component;
 @Order(0)
 public class ArgsValidatorAspect {
 
-    @Pointcut("execution(* com.petfeeding.server.controller.*(..)) && args(request)")
+    @Pointcut("execution(* com.petfeeding.server.controller.*.*(..)) && args(request)")
     public void argsValidatorPointCut(ApiRequest request) {
     }
 
