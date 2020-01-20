@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.petfeeding.server.dto.errorcode.ErrorCode;
 import com.petfeeding.server.dto.request.ApiRequest;
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.Nullable;
 
 import javax.validation.constraints.NotNull;
 
+@Slf4j
 public class ApiResponse<T> {
 
     @NotNull(message = "requestId should not be null")
@@ -35,6 +37,7 @@ public class ApiResponse<T> {
     }
 
     public static <T> ApiResponse<T> globalInternalErrorResp(ErrorCode errorCode) {
+        log.error("failed to handle request. errorCode: {}", errorCode);
         return new ApiResponse<>(System.currentTimeMillis(), errorCode);
     }
 
