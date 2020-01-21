@@ -1,6 +1,5 @@
 package com.petfeeding.server.dto.request.concrete.user;
 
-import com.petfeeding.server.dto.request.ApiRequest;
 import com.petfeeding.server.dto.request.LoginApiRequest;
 
 /**
