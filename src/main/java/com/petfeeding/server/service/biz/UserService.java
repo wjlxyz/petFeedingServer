@@ -1,14 +1,8 @@
 package com.petfeeding.server.service.biz;
 
-import com.petfeeding.server.dto.request.concrete.user.GetUserInfoRequest;
-import com.petfeeding.server.dto.request.concrete.user.LoginRequest;
-import com.petfeeding.server.dto.request.concrete.user.RegisterRequest;
-import com.petfeeding.server.dto.request.concrete.user.UpdateUserInfoRequest;
+import com.petfeeding.server.dto.request.concrete.user.*;
 import com.petfeeding.server.dto.response.ApiResponse;
-import com.petfeeding.server.dto.response.result.user.GetUserInfoResult;
-import com.petfeeding.server.dto.response.result.user.LoginResult;
-import com.petfeeding.server.dto.response.result.user.RegisterResult;
-import com.petfeeding.server.dto.response.result.user.UpdateUserInfoResult;
+import com.petfeeding.server.dto.response.result.user.*;
 
 /**
  * @author jinlong
@@ -23,4 +17,6 @@ public interface UserService {
     ApiResponse<UpdateUserInfoResult> updateUserInfo(UpdateUserInfoRequest request);
 
     ApiResponse<GetUserInfoResult> getUserInfo(GetUserInfoRequest request);
+
+    ApiResponse<ForgetPwdResult> forgetPwd(ForgetPwdRequest request);
 }

@@ -2,15 +2,9 @@ package com.petfeeding.server.service.biz.impl;
 
 import com.petfeeding.server.dal.mapper.UserMapper;
 import com.petfeeding.server.dal.model.User;
-import com.petfeeding.server.dto.request.concrete.user.UpdateUserInfoRequest;
-import com.petfeeding.server.dto.request.concrete.user.GetUserInfoRequest;
-import com.petfeeding.server.dto.request.concrete.user.LoginRequest;
-import com.petfeeding.server.dto.request.concrete.user.RegisterRequest;
+import com.petfeeding.server.dto.request.concrete.user.*;
 import com.petfeeding.server.dto.response.ApiResponse;
-import com.petfeeding.server.dto.response.result.user.GetUserInfoResult;
-import com.petfeeding.server.dto.response.result.user.LoginResult;
-import com.petfeeding.server.dto.response.result.user.RegisterResult;
-import com.petfeeding.server.dto.response.result.user.UpdateUserInfoResult;
+import com.petfeeding.server.dto.response.result.user.*;
 import com.petfeeding.server.service.biz.UserService;
 import com.petfeeding.server.service.constant.CommonConstants;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +46,10 @@ public class UserServiceImpl implements UserService {
         GetUserInfoResult result = new GetUserInfoResult();
         result.setAccountId(request.getAccountId());
         return ApiResponse.successRespFromReqWithResult(request, result);
+    }
+
+    @Override
+    public ApiResponse<ForgetPwdResult> forgetPwd(ForgetPwdRequest request) {
+        return null;
     }
 }

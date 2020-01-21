@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Aspect
 @Component
-@Order(-1)
+@Order(0)
 public class TokenValidatorAspect {
 
     private static Gson gson = new Gson();

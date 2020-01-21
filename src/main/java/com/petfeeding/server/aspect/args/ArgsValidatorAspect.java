@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Aspect
 @Component
-@Order(0)
+@Order(-1)
 public class ArgsValidatorAspect {
 
     @Pointcut("execution(* com.petfeeding.server.controller.*.*(..)) && args(request)")
