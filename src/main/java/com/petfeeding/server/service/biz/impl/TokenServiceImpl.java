@@ -23,18 +23,18 @@ public class TokenServiceImpl implements TokenService {
 
     /**
      * token pattern in redis:
-     * key: tk:{accountId}
+     * key: tk:{userId}
      * value: {token}@{loginAt}
      * expire time: 30days
      *
-     * @param request request with token and accountId
+     * @param request request with token and userId
      */
     @Override
     public void validateToken(ApiRequest request) {
-        if (request.getAccountId() == null || request.getToken() == null) {
+        if (request.getUserId() == null || request.getToken() == null) {
             throw new ApiException(ErrorCode.COMMON_ILLEGAL_ARGS_ERROR);
         }
-        if (!Objects.equals(redisTemplate.opsForValue().get(CommonConstants.TOKEN_PREFIX + request.getAccountId().toString()), request.getToken())) {
+        if (!Objects.equals(redisTemplate.opsForValue().get(CommonConstants.TOKEN_PREFIX + request.getUserId().toString()), request.getToken())) {
             throw new ApiException(ErrorCode.COMMON_TOKEN_EXPIRED_ERROR);
         }
     }

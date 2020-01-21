@@ -2,6 +2,8 @@ package com.petfeeding.server.service.biz.impl;
 
 import com.petfeeding.server.dal.mapper.UserMapper;
 import com.petfeeding.server.dal.model.User;
+import com.petfeeding.server.dal.model.UserExample;
+import com.petfeeding.server.dto.errorcode.ErrorCode;
 import com.petfeeding.server.dto.request.concrete.user.*;
 import com.petfeeding.server.dto.response.ApiResponse;
 import com.petfeeding.server.dto.response.result.user.*;
@@ -10,7 +12,9 @@ import com.petfeeding.server.service.constant.CommonConstants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -24,13 +28,32 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
+    @Transactional
     public ApiResponse<RegisterResult> register(RegisterRequest request) {
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andPhoneNumberEqualTo(request.getPhoneNumber());
+        List<User> users = userMapper.selectByExample(userExample);
+        if (users != null && users.size() > 0) {
+            return ApiResponse.fromReq(request, ErrorCode.USER_HAS_REGISTERED_ERROR);
+        }
+        User user = new User();
+        user.setPhoneNumber(request.getPhoneNumber());
+        user.setPassword(request.getPassword());
+        user.setUserRole(request.getRole());
+
         return ApiResponse.successRespFromReq(request);
     }
 
     @Override
     public ApiResponse<LoginResult> login(LoginRequest request) {
-        redisTemplate.opsForValue().set(CommonConstants.TOKEN_PREFIX + request.getAccountId(),
+        UserExample userExample = new UserExample();
+        userExample.createCriteria().andPhoneNumberEqualTo(request.getPhoneNumber());
+        List<User> users = userMapper.selectByExample(userExample);
+        if (users == null || users.size() <= 0) {
+            return ApiResponse.fromReq(request, ErrorCode.USER_NOT_EXISTED_ERROR);
+        }
+        User user = users.get(0);
+        redisTemplate.opsForValue().set(CommonConstants.TOKEN_PREFIX + user.getUserId(),
                 UUID.randomUUID().toString(), CommonConstants.TOKEN_EXPIRE_SECONDS, TimeUnit.SECONDS);
         return ApiResponse.successRespFromReq(request);
     }
@@ -42,9 +65,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ApiResponse<GetUserInfoResult> getUserInfo(GetUserInfoRequest request) {
-        User user = userMapper.selectByPrimaryKey(request.getAccountId());
+        User user = userMapper.selectByPrimaryKey(request.getUserId());
         GetUserInfoResult result = new GetUserInfoResult();
-        result.setAccountId(request.getAccountId());
+        result.setAccountId(request.getUserId());
         return ApiResponse.successRespFromReqWithResult(request, result);
     }
 

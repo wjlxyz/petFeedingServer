@@ -10,9 +10,10 @@ public enum  ErrorCode {
     INTERNAL_ERROR(-10101, "服务器内部错误"),
 
     COMMON_ILLEGAL_ARGS_ERROR(-10201, "参数错误"),
+    COMMON_TOKEN_EXPIRED_ERROR(-10202, "token过期"),
 
-    COMMON_TOKEN_EXPIRED_ERROR(-10202, "token过期")
-
+    USER_HAS_REGISTERED_ERROR(-10301, "用户已存在"),
+    USER_NOT_EXISTED_ERROR(-10302, "用户不存在")
     ;
 
 

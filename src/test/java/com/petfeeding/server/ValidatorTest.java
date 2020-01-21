@@ -22,7 +22,7 @@ public class ValidatorTest {
     }
 
     private LoginRequest getLoginRequst() {
-        String loginRequest = "{\"requestId\":1234567890,\"method\": \"login\",\"accountId\": \"1048764\"}";
+        String loginRequest = "{\"requestId\":1234567890,\"method\": \"login\",\"userId\": \"1048764\"}";
         Type typeToken = new TypeToken<LoginRequest>() {
         }.getType();
         return new Gson().fromJson(loginRequest, typeToken);

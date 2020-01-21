@@ -13,9 +13,4 @@ public abstract class ApiRequest {
     @NotNull(message = "method should not be null")
     private String method;
 
-    @NotNull(message = "accountId should not be null")
-    private Integer accountId;
-
-    private String token;
-
 }
