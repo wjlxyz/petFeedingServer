@@ -1,6 +1,5 @@
 package com.petfeeding.server.aspect.token;
 
-import com.google.gson.Gson;
 import com.petfeeding.server.dto.request.ApiRequest;
 import com.petfeeding.server.service.biz.TokenService;
 import lombok.extern.slf4j.Slf4j;
