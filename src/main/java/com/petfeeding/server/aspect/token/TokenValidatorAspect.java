@@ -21,7 +21,6 @@ import org.springframework.stereotype.Component;
 @Order(0)
 public class TokenValidatorAspect {
 
-    private static Gson gson = new Gson();
     @Autowired
     private TokenService tokenService;
 
