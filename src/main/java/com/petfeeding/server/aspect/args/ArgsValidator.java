@@ -1,8 +1,6 @@
 package com.petfeeding.server.aspect.args;
 
 import com.petfeeding.server.dto.errorcode.ErrorCode;
-import com.petfeeding.server.dto.request.ApiRequest;
-import com.petfeeding.server.dto.response.ApiResponse;
 import com.petfeeding.server.service.exception.ApiException;
 import org.hibernate.validator.HibernateValidator;
 
