@@ -1,6 +1,7 @@
 package com.petfeeding.server.aspect.token;
 
 import com.petfeeding.server.dto.request.ApiRequest;
+import com.petfeeding.server.dto.request.LoginApiRequest;
 import com.petfeeding.server.service.biz.TokenService;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -26,7 +27,7 @@ public class TokenValidatorAspect {
     @Before(value = "@annotation(com.petfeeding.server.aspect.token.TokenValidatorAop)")
     public void validateToken(JoinPoint point) {
         log.info("validate token");
-        ApiRequest request = (ApiRequest) point.getArgs()[0];
+        LoginApiRequest request = (LoginApiRequest) point.getArgs()[0];
         tokenService.validateToken(request);
     }
 }
