@@ -1,6 +1,6 @@
 package com.petfeeding.server.service.biz;
 
-import com.petfeeding.server.dto.request.ApiRequest;
+import com.petfeeding.server.dto.request.LoginApiRequest;
 
 /**
  * @author jinlong
@@ -8,5 +8,5 @@ import com.petfeeding.server.dto.request.ApiRequest;
  */
 public interface TokenService {
 
-    void validateToken(ApiRequest request);
+    void validateToken(LoginApiRequest request);
 }

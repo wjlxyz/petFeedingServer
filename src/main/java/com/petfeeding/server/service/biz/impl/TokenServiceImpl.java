@@ -2,6 +2,7 @@ package com.petfeeding.server.service.biz.impl;
 
 import com.petfeeding.server.dto.errorcode.ErrorCode;
 import com.petfeeding.server.dto.request.ApiRequest;
+import com.petfeeding.server.dto.request.LoginApiRequest;
 import com.petfeeding.server.service.biz.TokenService;
 import com.petfeeding.server.service.constant.CommonConstants;
 import com.petfeeding.server.service.exception.ApiException;
@@ -30,7 +31,7 @@ public class TokenServiceImpl implements TokenService {
      * @param request request with token and userId
      */
     @Override
-    public void validateToken(ApiRequest request) {
+    public void validateToken(LoginApiRequest request) {
         if (request.getUserId() == null || request.getToken() == null) {
             throw new ApiException(ErrorCode.COMMON_ILLEGAL_ARGS_ERROR);
         }
