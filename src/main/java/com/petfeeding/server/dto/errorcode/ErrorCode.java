@@ -17,7 +17,6 @@ public enum  ErrorCode {
     USER_PHONE_NUMBER_OR_PASSWORD_ERROR(-10303, "电话号码或密码错误")
     ;
 
-
     private int code;
     private String msg;
 
