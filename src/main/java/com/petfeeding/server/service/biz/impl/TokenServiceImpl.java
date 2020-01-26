@@ -11,6 +11,8 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
+import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author jinlong
@@ -26,7 +28,7 @@ public class TokenServiceImpl implements TokenService {
      * token pattern in redis:
      * key: tk:{userId}
      * value: {token}@{loginAt}
-     * expire time: 30days
+     * expire time: 15days
      *
      * @param request request with token and userId
      */
@@ -35,8 +37,12 @@ public class TokenServiceImpl implements TokenService {
         if (request.getUserId() == null || request.getToken() == null) {
             throw new ApiException(ErrorCode.COMMON_ILLEGAL_ARGS_ERROR);
         }
+        // token校验成功则将Token过期时间更新为15天
         if (!Objects.equals(redisTemplate.opsForValue().get(CommonConstants.TOKEN_PREFIX + request.getUserId().toString()), request.getToken())) {
             throw new ApiException(ErrorCode.COMMON_TOKEN_EXPIRED_ERROR);
+        } else {
+            redisTemplate.opsForValue().set(CommonConstants.TOKEN_PREFIX + request.getUserId(),
+                    UUID.randomUUID().toString(), CommonConstants.TOKEN_EXPIRE_SECONDS, TimeUnit.SECONDS);
         }
     }
 }

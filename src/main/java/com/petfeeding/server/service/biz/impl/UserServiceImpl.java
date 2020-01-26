@@ -53,8 +53,12 @@ public class UserServiceImpl implements UserService {
             return ApiResponse.fromReq(request, ErrorCode.USER_NOT_EXISTED_ERROR);
         }
         User user = users.get(0);
+        if (!user.getPassword().equals(request.getPassword())) {
+            return ApiResponse.fromReq(request, ErrorCode.USER_PHONE_NUMBER_OR_PASSWORD_ERROR);
+        }
+
         redisTemplate.opsForValue().set(CommonConstants.TOKEN_PREFIX + user.getUserId(),
-                UUID.randomUUID().toString(), CommonConstants.TOKEN_EXPIRE_SECONDS, TimeUnit.SECONDS);
+                UUID.randomUUID().toString() + "@" + System.currentTimeMillis(), CommonConstants.TOKEN_EXPIRE_SECONDS, TimeUnit.SECONDS);
         return ApiResponse.successRespFromReq(request);
     }
 

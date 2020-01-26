@@ -13,7 +13,8 @@ public enum  ErrorCode {
     COMMON_TOKEN_EXPIRED_ERROR(-10202, "token过期"),
 
     USER_HAS_REGISTERED_ERROR(-10301, "用户已存在"),
-    USER_NOT_EXISTED_ERROR(-10302, "用户不存在")
+    USER_NOT_EXISTED_ERROR(-10302, "用户不存在"),
+    USER_PHONE_NUMBER_OR_PASSWORD_ERROR(-10303, "电话号码或密码错误")
     ;
 
 

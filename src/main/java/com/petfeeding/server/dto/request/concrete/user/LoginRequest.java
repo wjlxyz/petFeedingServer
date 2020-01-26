@@ -4,6 +4,7 @@ import com.petfeeding.server.dto.request.UnLoginApiRequest;
 import lombok.Data;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 /**
  * @author jinlong
@@ -12,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 @Data
 public class LoginRequest extends UnLoginApiRequest {
 
-    @NotBlank(message = "phoneNumber should not be blank")
+    @NotNull(message = "phoneNumber should not be blank")
     private Integer phoneNumber;
 
     @NotBlank(message = "password should not be blank")
